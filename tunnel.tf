@@ -1,17 +1,18 @@
-resource "cloudflare_zero_trust_tunnel_cloudflared" "root_domain" {
-    account_id = var.account_id
-    name       = "root-domain"
-    config_src = "cloudflare"
-}
+module "tunnel" {
+	source = "./modules/tunnel"
 
-resource "cloudflare_zero_trust_tunnel_cloudflared" "http_server" {
-    account_id = var.account_id
-    name       = "http-server"
-    config_src = "cloudflare"
-}
+	account_id  = var.account_id
+	zone_id     = cloudflare_zone.panda_dev_net.id
 
-resource "cloudflare_zero_trust_tunnel_cloudflared" "blog" {
-    account_id = var.account_id
-    name       = "blog"
-    config_src = "cloudflare"
+	tunnels = {
+		root-domain: {
+			dns_record_name = "panda-dev.net"
+		},
+		http-server: {
+			dns_record_name = "http-server"
+		},
+		blog: {
+			dns_record_name = "blog"
+		},
+	}
 }
