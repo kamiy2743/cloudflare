@@ -1,8 +1,8 @@
 resource "cloudflare_ruleset" "no_cache" {
-    zone_id = data.cloudflare_zone.panda_dev_net.id
-    name = "no-cache"
-    kind = "zone"
-    phase = "http_request_cache_settings"
+    zone_id = cloudflare_zone.panda_dev_net.id
+    name    = "no-cache"
+    kind    = "zone"
+    phase   = "http_request_cache_settings"
 
     rules = [
         {
