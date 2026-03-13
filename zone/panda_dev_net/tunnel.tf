@@ -1,5 +1,5 @@
 module "tunnel" {
-	source = "./modules/tunnel"
+	source = "../../modules/tunnel"
 
 	account_id  = var.account_id
 	zone_id     = cloudflare_zone.panda_dev_net.id
