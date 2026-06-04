@@ -2,7 +2,7 @@ resource "cloudflare_zero_trust_access_application" "blog" {
     account_id       = var.account_id
     type             = "self_hosted"
     name             = "blog"
-    session_duration = "15m"
+    session_duration = "24h"
 
     http_only_cookie_attribute = true
     same_site_cookie_attribute = "lax"
@@ -10,6 +10,16 @@ resource "cloudflare_zero_trust_access_application" "blog" {
     enable_binding_cookie      = true
 
     destinations = [
+        # stg
+        {
+            type = "public"
+            uri  = "blog-stg.panda-dev.net"
+        },
+        {
+            type = "public"
+            uri  = "blog-stg.panda-dev.net/*"
+        },
+        # prd
         {
             type = "public"
             uri  = "blog.panda-dev.net/admin"
