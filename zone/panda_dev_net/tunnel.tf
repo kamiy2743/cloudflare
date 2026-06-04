@@ -14,5 +14,8 @@ module "tunnel" {
 		blog: {
 			dns_record_name = "blog"
 		},
+		blog-stg: {
+			dns_record_name = "blog-stg"
+		},
 	}
 }
